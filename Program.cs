@@ -5,6 +5,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
+using static CET2007_assignment.TeachingSession;
 
 namespace CET2007_assignment
 {
@@ -17,12 +18,14 @@ namespace CET2007_assignment
     }
 
     //class created for instancing rooms that are available (or not available depending)
-    public class Room
+    public class Room : IRoomFileStorage
     {
         private string roomDetails { get; set; }
         private int capacity { get; set; }
         private string[] equipment { get; set; }
         private string roomType { get; set; }
+
+        public string roomsFile = "rooms.json";
 
         public Room(string roomDetails, int capacity, string[] equipment, string roomType)
         {
@@ -30,6 +33,28 @@ namespace CET2007_assignment
             this.capacity = capacity;
             this.equipment = equipment;
             this.roomType = roomType;
+        }
+
+        public List<Room> ReadRooms()
+        {
+            //read the rooms from the file and return a list of rooms
+            return null;
+        }
+
+        public void SaveRooms(List<Room> rooms)
+        {
+            //save each room from the list into the file
+        }
+
+        public Room FindRoomById(int id)
+        {
+            //search the file for the room with a matching id (or name, so maybe change slightly)
+            return null;
+        }
+
+        public void AddRoom(Room room)
+        {
+            //add a new room instance to the file
         }
 
     }
@@ -84,5 +109,16 @@ namespace CET2007_assignment
             this.equipmentRequired = equipmentRequired;
         }
 
+
+        public interface IRoomFileStorage
+        {
+            List<Room> ReadRooms();
+
+            void SaveRooms(List<Room> rooms);
+
+            Room FindRoomById(int id);
+
+            void AddRoom(Room room);
+        }
     }
 }
